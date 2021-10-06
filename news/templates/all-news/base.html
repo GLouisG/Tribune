@@ -1,0 +1,44 @@
+{% load bootstrap3 %}
+{% load static%}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  {% if title %}
+  <title>Moringa Tribune - {{title}}</title>
+  {% else %}
+    <title> Moringa Tribune </title>
+  {% endif %}
+
+  {% block styles %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/basenews.css' %}">
+  {% endblock %}
+
+</head>
+<body>
+    {% include "navbar.html" %}
+
+    {% block content %} <h1 class='text-center'>News for {{date|date:"l d-F Y"}}</h1> {%endblock%}
+
+    {% block scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     {% bootstrap_javascript %}
+    {% endblock %}
+</body>
+</html>
+
+<!-- Any text surrounded by { {  }} is referred to as template variables. They are dynamic data provided by view functions.
+Any text surrounded by {  % % } is considered a template tag 
+the date filter formats a date object and we pass in some arguments on how to display the date data
+l- specifies the day of the week 
+d specifies the date 0-31
+F specifies the month 
+Y specifies the year
+First we load the bootstrap3 dependency to our base.html template. We then create two blocks block styles this is where we will define all the styles for our templates we then define {% bootstrap_css %} template tag which is a link to the bootstrap CSS file. Next, we create a block scripts which we define the javascript and here we have a link to the jquery CDN and the {% bootstrap_javascript %}which is the bootstrap javascript link.
+
+Inside our style block, we create a new link to our CSS file. We call the static template tag and pass in the path to the file.
+
+Now that we have done all that, we need to tell Django where to find our static file. We do this inside our settings.py file.
+-->
